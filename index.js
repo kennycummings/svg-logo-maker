@@ -1,3 +1,5 @@
+import { Triangle, Circle, Square, Shape } from './shapes.js';
+
 import inquirer from 'inquirer';
 
 async function getUserInput() {
@@ -23,5 +25,30 @@ async function getUserInput() {
     return userInput;
 }
 
-export { getUserInput };
+async function main() {
+    const userInput = await getUserInput();
 
+    let shape;
+
+    switch (userInput.shape) {
+        case 'triangle':
+            shape = new Triangle();
+            break;
+        case 'circle':
+            shape = new Circle();
+            break;
+        case 'square':
+            shape = new Square();
+            break;
+        default:
+            console.error('Invalid shape selection');
+            return;
+    }
+
+    shape.setColor(userInput.shapeColor);
+
+    console.log(`Rendering ${userInput.shape} with color ${userInput.shapeColor}:`);
+    console.log(shape.render());
+}
+
+main();
