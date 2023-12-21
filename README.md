@@ -17,9 +17,9 @@ This web application prompts the user for text, shape, and color of the shape. B
 Jonathan and Mustapha helped debug.
 
 Jonathan Abrams
-Github:
+GitHub: https://github.com/jabrams513
 
 Mustapha Kromah
-Github:
+GitHub: https://github.com/mustapha103
 
-## Links
+## Video Demo
