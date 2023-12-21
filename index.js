@@ -1,13 +1,18 @@
-import { Triangle, Circle, Square, Shape } from './shapes.js';
+const fs = require('fs');
+const inquirer = require('inquirer');
+const { Triangle, Circle, Square } = require('./lib/shapes.js');
 
-import inquirer from 'inquirer';
-
-async function getUserInput() {
-    const userInput = await inquirer.prompt([
+function getUserInput() {
+    inquirer.prompt([
         {
             type: 'input',
             name: 'text',
             message: 'Enter up to three characters for the text:',
+        },
+        {
+            type: 'input',
+            name: 'textColor',
+            message: 'Enter a color for the text:',
         },
         {
             type: 'list',
@@ -20,35 +25,29 @@ async function getUserInput() {
             name: 'shapeColor',
             message: 'Enter a color for the shape:',
         },
-    ]);
+    ]).then((userInput) => {
+        let shape;
 
-    return userInput;
+        switch (userInput.shape) {
+            case 'triangle':
+                shape = new Triangle(userInput.text, userInput.textColor, userInput.shapeColor);
+                break;
+            case 'circle':
+                shape = new Circle(userInput.text, userInput.textColor, userInput.shapeColor);
+                break;
+            case 'square':
+                shape = new Square(userInput.text, userInput.textColor, userInput.shapeColor);
+                break;
+        }
+
+        fs.writeFile('logo.svg', shape.render(), (err) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("Generated successfully");
+            }
+        });
+    });
 }
 
-async function main() {
-    const userInput = await getUserInput();
-
-    let shape;
-
-    switch (userInput.shape) {
-        case 'triangle':
-            shape = new Triangle();
-            break;
-        case 'circle':
-            shape = new Circle();
-            break;
-        case 'square':
-            shape = new Square();
-            break;
-        default:
-            console.error('Invalid shape selection');
-            return;
-    }
-
-    shape.setColor(userInput.shapeColor);
-
-    console.log(`Rendering ${userInput.shape} with color ${userInput.shapeColor}:`);
-    console.log(shape.render());
-}
-
-main();
+getUserInput();

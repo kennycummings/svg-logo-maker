@@ -12,4 +12,14 @@ You can input up to three characters for the text, select a shape, and finally i
 
 This web application prompts the user for text, shape, and color of the shape. Based on the selected shape, it creates an instance of the corresponding class, applies the chosen color to the shape, and generates a scalable vector graphic.
 
+## Contributors
+
+Jonathan and Mustapha helped debug.
+
+Jonathan Abrams
+Github:
+
+Mustapha Kromah
+Github:
+
 ## Links
